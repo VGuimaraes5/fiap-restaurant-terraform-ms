@@ -1,0 +1,5 @@
+variable "lambda_bucket_id" {}
+variable "apigateway_id" {}
+variable "apigateway_execution_arn" {}
+variable "aws_subnet" {}
+variable "aws_eks_elb" {}
