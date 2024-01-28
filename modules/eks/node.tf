@@ -9,12 +9,12 @@ resource "aws_eks_node_group" "eks_node_group" {
   ]
 
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t2.small"]
+  instance_types = ["t2.medium"]
 
   scaling_config {
     desired_size = 1
     max_size     = 2
-    min_size     = 0
+    min_size     = 1
   }
 
   depends_on = [

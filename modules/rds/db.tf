@@ -28,6 +28,14 @@ resource "aws_db_instance" "fiap-rds-mysql-instance" {
   publicly_accessible    = true
 }
 
+resource "null_resource" "db_init" {
+  depends_on = [aws_db_instance.fiap-rds-mysql-instance]
+
+  provisioner "local-exec" {
+    command = "mysql -h ${replace(aws_db_instance.fiap-rds-mysql-instance.endpoint, ":3306", "")} -P 3306 -u ${var.db_username} -p${var.db_password} < ./modules/rds/start-db.sql"
+  }
+}
+
 output "rds_endpoint" {
   value = aws_db_instance.fiap-rds-mysql-instance.endpoint
 }
